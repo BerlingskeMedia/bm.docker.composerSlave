@@ -1,0 +1,9 @@
+version: '2'
+services:
+  app:
+    container_name: docker-composer-slave
+    build:
+      context: .
+      args:
+        - USER_ID=1502
+        - USER_NAME=development
