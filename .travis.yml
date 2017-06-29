@@ -2,4 +2,4 @@ services:
   - docker
 
 script:
-  - docker build -t bmxmale/docker-composer-slave .
+  - docker-compose -f build.yml build
