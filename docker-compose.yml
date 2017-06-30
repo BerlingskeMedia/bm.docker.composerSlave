@@ -1,5 +1,0 @@
-version: '2'
-services:
-  app:
-    container_name: docker-composer-slave
-    image: bmxmale/docker-composer-slave:latest

@@ -1,18 +1,22 @@
-FROM php:7.0
+FROM composer:latest
 
 MAINTAINER Mateusz Lerczak <mlerczak@pl.sii.eu>
 
 ARG USER_ID=1502
-ARG USER_NAME=development
+ARG USER_NAME="development"
 
-RUN useradd -u ${USER_ID} -ms /bin/bash ${USER_NAME} \
-    && chown -R ${USER_NAME}:${USER_NAME} /srv
+ENV GITHUB_OAUTH "THIS_SHOULD_BE_YOUR_OAUTH"
 
-RUN apt-get update && apt-get install git -y
+RUN adduser -D -u ${USER_ID} -s /bin/bash ${USER_NAME}
 
-RUN curl -sS https://getcomposer.org/installer | \
-    php -- --install-dir=/usr/local/bin --filename=composer
+COPY container/.ssh /home/${USER_NAME}/.ssh
+
+RUN chown -R ${USER_NAME}:${USER_NAME} /app \
+    && chown -R ${USER_NAME}:${USER_NAME} /composer \
+    && chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}
 
 USER ${USER_NAME}
 
-WORKDIR /srv
+COPY container/docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
