@@ -2,7 +2,7 @@ FROM composer:latest
 
 MAINTAINER Mateusz Lerczak <mlerczak@pl.sii.eu>
 
-ARG USER_ID=1502
+ARG USER_ID=2000
 ARG USER_NAME="development"
 
 ENV GITHUB_OAUTH "THIS_SHOULD_BE_YOUR_OAUTH"
